@@ -55,12 +55,23 @@ const products = new mongoose.Schema({
       },
       message: "Narxi 0 dan katta va musbat bo'lsin",
     },
-    priceType: {
-      type: String,
-      required: true,
-    },
-    baholar: {
-      type: Number,
-    },
+  },
+  priceType: {
+    type: String,
+    required: true,
+  },
+  baholar: {
+    type: Number,
+  },
+  category: {
+    type: category,
   },
 });
+const Products = mongoose.model("products", products);
+const Category = mongoose.model("categories", category);
+const sizes = mongoose.model("sizes", size);
+module.exports = {
+  Products,
+  Category,
+  sizes,
+};
