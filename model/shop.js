@@ -1,77 +1,50 @@
 const mongoose = require("mongoose");
-
-const category = new mongoose.Schema({
+const appError = require("../utility/appError");
+const Schema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "categoriyaga nom berish majburiy"],
-  },
-  photo: {
-    type: String,
-    default: "no photo",
-  },
-});
-const size = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    upper: true,
-    enum: ["XS", "S", "M", "L", "XL"],
-  },
-});
-
-const products = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
-    minLength: 5,
+    required: [true, "Name is required"],
   },
   description: {
     type: String,
-    required: true,
-    mingLength: 25,
+    required: [true, "Description is reequired"],
   },
   photo: {
     type: String,
-    required: true,
+    required: [true, "Photo is required"],
   },
+  price: {
+    type: Number,
+    required: [true, "Price is required"],
+  },
+  size: [
+    {
+      type: mognoose.Schema.ObjectId,
+      ref: "Size",
+    },
+  ],
+  color: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Color",
+    },
+  ],
   photos: [
     {
       type: String,
-      required: true,
     },
   ],
-  size: {
-    type: size,
-    required: true,
-  },
-  color: [String],
-
-  price: {
+  quantity: {
     type: Number,
-    required: true,
-    validate: {
-      validator: function (val) {
-        return val > 0;
-      },
-      message: "Narxi 0 dan katta va musbat bo'lsin",
-    },
-  },
-  priceType: {
-    type: String,
-    required: true,
-  },
-  baholar: {
-    type: Number,
+    required: [true, "Quantity is required"],
+    min: 1,
   },
   category: {
-    type: category,
+    type: mongoose.Schema.ObjectId,
+    ref: "Category",
+    reqiured: true,
   },
 });
-const Products = mongoose.model("products", products);
-const Category = mongoose.model("categories", category);
-const sizes = mongoose.model("sizes", size);
-module.exports = {
-  Products,
-  Category,
-  sizes,
-};
+
+const Product = mongoose.model("Product", Schema);
+module.exports = Product;
