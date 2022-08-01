@@ -1,4 +1,4 @@
-const hand = require("./handlerController");
+const hand = require("./productsHandler");
 console.log(hand);
 const Products = require("../model/shop");
 const getAllProducts = (req, res, next) => {

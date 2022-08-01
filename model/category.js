@@ -24,11 +24,11 @@ const colorSchema = new mongoose.Schema({
     required: true,
   },
 });
-const category = mongoose.model("Category", categorySchema);
-const size = mongoose.model("Size", sizeSchema);
-const color = mongoose.model("Color", colorSchema);
+const Category = mongoose.model("Category", categorySchema);
+const Size = mongoose.model("Size", sizeSchema);
+const Color = mongoose.model("Color", colorSchema);
 module.exports = {
-  category,
-  size,
-  color,
+  Category,
+  Size,
+  Color,
 };

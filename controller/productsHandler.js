@@ -1,9 +1,6 @@
 const AppError = require("../utility/appError");
 const catchAsync = require("../utility/catchAsync");
-const Products = require("../model/shop");
 const FeatureApi = require("../utility/featureApi");
-
-const { category, size, color } = require("../model/category");
 function resFunc(res, data, statusCode) {
   res.status(statusCode).json({
     status: "sucess",
@@ -18,7 +15,10 @@ const getAll = catchAsync(async (req, res, next, Model) => {
     .field()
     .paginate();
 
-  data = await data.databaseQuery;
+  data = await data.databaseQuery
+    .populate("color")
+    .populate("size")
+    .populate("category");
   resFunc(res, data, 200);
 });
 const getOne = catchAsync(async (req, res, next, Model) => {
