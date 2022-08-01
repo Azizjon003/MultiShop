@@ -1,5 +1,5 @@
 const Users = require("../model/user");
-
+const hand = require("./handlerController");
 const getAllUsers = (req, res, next) => {
   hand.getAll(req, res, next, Users);
 };
