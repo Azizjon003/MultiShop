@@ -18,7 +18,8 @@ const getAll = catchAsync(async (req, res, next, Model) => {
   data = await data.databaseQuery
     .populate("color")
     .populate("size")
-    .populate("category");
+    .populate("category")
+    .populate("reviews");
   resFunc(res, data, 200);
 });
 const getOne = catchAsync(async (req, res, next, Model) => {

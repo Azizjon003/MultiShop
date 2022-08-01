@@ -18,12 +18,19 @@ const sizeSchema = new mongoose.Schema({
   },
 });
 
-const colorSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const colorSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
   },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
+
 const Category = mongoose.model("Category", categorySchema);
 const Size = mongoose.model("Size", sizeSchema);
 const Color = mongoose.model("Color", colorSchema);

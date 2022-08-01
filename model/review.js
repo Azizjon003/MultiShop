@@ -4,7 +4,7 @@ const reviewSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  baho: {
+  rating: {
     type: Number,
     required: true,
     min: 1,
@@ -13,11 +13,13 @@ const reviewSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.ObjectId,
     ref: "User",
+    required: true,
   },
   product: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
+    required: true,
   },
 });
-
-module.exports = mongoose.model("Review", reviewSchema);
+const review = mongoose.model("Review", reviewSchema);
+module.exports = review;

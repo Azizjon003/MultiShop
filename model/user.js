@@ -1,10 +1,12 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
+const crypto = require("crypto");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
+    unique: true,
   },
   email: {
     type: String,
@@ -16,6 +18,7 @@ const userSchema = new mongoose.Schema({
       },
       message: "Now email is not valid",
     },
+    unique: true,
   },
   lastName: {
     type: String,
@@ -34,6 +37,7 @@ const userSchema = new mongoose.Schema({
       },
       message: "Now mobile is not valid",
     },
+    unique: true,
   },
   country: {
     type: String,
@@ -43,6 +47,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     minLegnth: [8, "Password must be at least 8 characters"],
     required: [true, "Password is required"],
+    select: false,
     validate: {
       validator: function (val) {
         return validator.isStrongPassword(val);
@@ -63,6 +68,13 @@ const userSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: "JonatmaUchun",
   },
+  role: {
+    type: String,
+    enum: ["user", "admin"],
+    default: "user",
+  },
+  hashToken: String,
+  expiresDate: Date,
 });
 userSchema.pre("save", async function (next) {
   if (!this.isModified("password")) next();
@@ -70,5 +82,14 @@ userSchema.pre("save", async function (next) {
   this.password = await bcrypt.hash(this.password, 12);
   this.passwordConfirm = undefined;
 });
+userSchema.methods.resetToken = async function () {
+  let token = crypto.randomBytes(32).toString("hex");
+  console.log("tokenhashmas", token);
+
+  let hash = await crypto.createHash("sha256").update(token).digest("hex");
+  this.hashToken = hash;
+  this.expiresDate = Date.now() + 10 * 60 * 1000;
+  return token;
+};
 const User = mongoose.model("User", userSchema);
 module.exports = User;
