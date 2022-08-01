@@ -2,10 +2,12 @@ const dotenv = require("dotenv");
 dotenv.config({ path: "config.env" });
 const app = require("./midleweare/app");
 const mongoose = require("mongoose");
-
+process.on("uncaughtException", (err) => {
+  console.log("Uncaught Exception Error: ", err.message);
+  proccess.exit(1);
+});
 const DB = process.env.DB.replace("<password>", process.env.PASSWORD);
 console.log(DB);
-console.log(process.env.PORT);
 const port = process.env.PORT || 8000;
 
 mongoose.connect(DB).then(() => {
@@ -13,4 +15,9 @@ mongoose.connect(DB).then(() => {
 });
 app.listen(port, () => {
   console.log(`Listening port is ${port}`);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("Unhandled Rejection Error: ", err.message);
+  proccess.exit(1);
 });

@@ -1,6 +1,6 @@
 const hand = require("./handlerController");
 console.log(hand);
-const { Products, Category, sizes } = require("../model/shop");
+const Products = require("../model/shop");
 const getAllProducts = (req, res, next) => {
   hand.getAll(req, res, next, Products);
 };

@@ -19,7 +19,7 @@ const Schema = new mongoose.Schema({
   },
   size: [
     {
-      type: mognoose.Schema.ObjectId,
+      type: mongoose.Schema.ObjectId,
       ref: "Size",
     },
   ],

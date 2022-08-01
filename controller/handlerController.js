@@ -1,6 +1,7 @@
 const AppError = require("../utility/appError");
 const catchAsync = require("../utility/catchAsync");
-const { Products, Category, sizes } = require("../model/shop");
+const Products = require("../model/shop");
+const { category, size, color } = require("../model/category");
 function resFunc(res, data, statusCode) {
   res.status(statusCode).json({
     status: "sucess",

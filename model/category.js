@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const categrySchema = new mongoose.Schema({
+const categorySchema = new mongoose.Schema({
   name: {
     type: String,
     required: [true, "Name is required"],
@@ -10,6 +10,7 @@ const categrySchema = new mongoose.Schema({
     required: [true, "Photo is required"],
   },
 });
+
 const sizeSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -23,8 +24,7 @@ const colorSchema = new mongoose.Schema({
     required: true,
   },
 });
-
-const category = mongoose.model("Category", categrySchema);
+const category = mongoose.model("Category", categorySchema);
 const size = mongoose.model("Size", sizeSchema);
 const color = mongoose.model("Color", colorSchema);
 module.exports = {
