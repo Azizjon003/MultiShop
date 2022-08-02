@@ -11,14 +11,18 @@ function resFunc(res, data, statusCode) {
     data,
   });
 }
-const getAll = catchAsync(async (req, res, next, Model) => {
+const getAll = catchAsync(async (req, res, next, Model, option) => {
   let data = new FeatureApi(req.query, Model)
     .filter()
     .sort()
     .field()
     .paginate();
 
-  data = await data.databaseQuery;
+  data = await data.databaseQuery.populate({
+    path: "products",
+    select: "name id",
+  });
+  console.log(data);
   resFunc(res, data, 200);
 });
 const getOne = catchAsync(async (req, res, next, Model) => {

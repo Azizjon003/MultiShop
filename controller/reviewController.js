@@ -1,6 +1,17 @@
 const AppError = require("../utility/appError");
 const catchAsyncUser = require("../utility/catchAsyncUser");
 const Review = require("../model/review");
+
+const getReview = catchAsyncUser(async (req, res, next) => {
+  const filter = {};
+  if (req.params.prodictid) filter.product = req.params.prodictid;
+  const reviews = await Review.find(filter).select("-__v -product");
+  res.status(200).json({
+    status: "success",
+    results: reviews.length,
+    reviews,
+  });
+});
 const addReview = catchAsyncUser(async (req, res, next) => {
   console.log(req.params);
   console.log(req.body);
@@ -19,4 +30,5 @@ const addReview = catchAsyncUser(async (req, res, next) => {
 
 module.exports = {
   addReview,
+  getReview,
 };

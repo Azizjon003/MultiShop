@@ -1,7 +1,11 @@
 const hand = require("./handlerController");
 const { Category, size, color } = require("../model/category");
+let option = {
+  path: "products",
+  select: "name _id",
+};
 const getAllCategory = (req, res, next) => {
-  hand.getAll(req, res, next, Category);
+  hand.getAll(req, res, next, Category, option);
 };
 
 const getOneCategory = (req, res, next) => {

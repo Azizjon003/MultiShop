@@ -1,5 +1,6 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
 const app = express();
 
 const productRoute = require("../routes/products");
@@ -10,6 +11,7 @@ const SizeRoute = require("../routes/size");
 const ReviewRoute = require("../routes/review");
 const errorHandler = require("../controller/errorController");
 
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use("/api/v1/product", productRoute);

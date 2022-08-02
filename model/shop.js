@@ -58,5 +58,10 @@ Schema.virtual("reviews", {
   foreignField: "product",
 });
 
+Schema.pre(/^find/, function (next) {
+  this.populate("color").populate("size").populate("category");
+  next();
+});
+
 const Product = mongoose.model("Product", Schema);
 module.exports = Product;
