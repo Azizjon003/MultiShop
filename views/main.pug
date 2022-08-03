@@ -1,0 +1,120 @@
+extends base
+block content
+    .container-fluid.pt-5
+      .row.px-xl-5.pb-3
+        .col-lg-3.col-md-6.col-sm-12.pb-1
+          .d-flex.align-items-center.bg-light.mb-4(style='padding: 30px')
+            h1.fa.fa-check.text-primary.m-0.mr-3
+            h5.font-weight-semi-bold.m-0 Quality Product
+        .col-lg-3.col-md-6.col-sm-12.pb-1
+          .d-flex.align-items-center.bg-light.mb-4(style='padding: 30px')
+            h1.fa.fa-shipping-fast.text-primary.m-0.mr-2
+            h5.font-weight-semi-bold.m-0 Free Shipping
+        .col-lg-3.col-md-6.col-sm-12.pb-1
+          .d-flex.align-items-center.bg-light.mb-4(style='padding: 30px')
+            h1.fas.fa-exchange-alt.text-primary.m-0.mr-3
+            h5.font-weight-semi-bold.m-0 14-Day Return
+        .col-lg-3.col-md-6.col-sm-12.pb-1
+          .d-flex.align-items-center.bg-light.mb-4(style='padding: 30px')
+            h1.fa.fa-phone-volume.text-primary.m-0.mr-3
+            h5.font-weight-semi-bold.m-0 24/7 Support
+    // Featured End
+    // Categories Start
+    .container-fluid.pt-5
+      h2.section-title.position-relative.text-uppercase.mx-xl-5.mb-4
+        span.bg-secondary.pr-3 Categories 
+      .row.px-xl-5.pb-3.kattadiv
+        each el in data
+            .col-lg-3.col-md-4.col-sm-6.pb-1
+                a.text-decoration-none(href=`'${el._id}'`)
+                    .cat-item.d-flex.align-items-center.mb-4
+                        .overflow-hidden(style='width: 100px; height: 100px')
+                            img.img-fluid(src=`${el.photo}`, alt='')
+                        .flex-fill.pl-3
+                            h6 el.name
+                            small.text-body= `${el.products.length} Products Available`       
+    // Categories End
+    // Products Start
+    .container-fluid.pt-5.pb-3
+      h2.section-title.position-relative.text-uppercase.mx-xl-5.mb-4
+        span.bg-secondary.pr-3 Featured Products
+      .row.px-xl-5.products
+        each el in products
+
+            .col-lg-3.col-md-4.col-sm-6.pb-1
+                .product-item.bg-light.mb-4
+                    .product-img.position-relative.overflow-hidden
+                        img.img-fluid.w-100(src=`${el.photo}`, alt='')
+                        .product-action
+                            a.btn.btn-outline-dark.btn-square(href='')
+                                i.fa.fa-shopping-cart
+                            a.btn.btn-outline-dark.btn-square(href='')
+                                i.far.fa-heart
+                    .text-center.py-4
+                        a.h6.text-decoration-none.text-truncate(href=`/detail.html?${el._id}`)= el.name
+                        .d-flex.align-items-center.justify-content-center.mt-2
+                            h5= el.price
+                            h6.text-muted.ml-2
+                                del= el.price
+                        .d-flex.align-items-center.justify-content-center.mb-1
+                            small.fa.fa-star.text-primary.mr-1
+                            small.fa.fa-star.text-primary.mr-1
+                            small.fa.fa-star.text-primary.mr-1
+                            small.fa.fa-star.text-primary.mr-1
+                            small.fa.fa-star.text-primary.mr-1
+                            small (99)   
+    .container-fluid.pt-5.pb-3
+    // Offer End
+    // Products Start
+    .container-fluid.pt-5.pb-3
+      h2.section-title.position-relative.text-uppercase.mx-xl-5.mb-4
+        span.bg-secondary.pr-3 Recent Products
+      .row.px-xl-5.products
+        .col-lg-3.col-md-4.col-sm-6.pb-1
+          .product-item.bg-light.mb-4
+            .product-img.position-relative.overflow-hidden
+              img.img-fluid.w-100(src='img/product-1.jpg', alt='')
+              .product-action
+                a.btn.btn-outline-dark.btn-square(href='')
+                  i.fa.fa-shopping-cart
+                a.btn.btn-outline-dark.btn-square(href='')
+                  i.far.fa-heart
+                a.btn.btn-outline-dark.btn-square(href='')
+                  i.fa.fa-sync-alt
+                a.btn.btn-outline-dark.btn-square(href='')
+                  i.fa.fa-search
+            .text-center.py-4
+              a.h6.text-decoration-none.text-truncate(href='') Product Name Goes Here
+              .d-flex.align-items-center.justify-content-center.mt-2
+                h5 $123.00
+                h6.text-muted.ml-2
+                  del $123.00
+              .d-flex.align-items-center.justify-content-center.mb-1
+                small.fa.fa-star.text-primary.mr-1
+                small.fa.fa-star.text-primary.mr-1
+                small.fa.fa-star.text-primary.mr-1
+                small.fa.fa-star.text-primary.mr-1
+                small.fa.fa-star.text-primary.mr-1
+                small (99)
+    // Products End
+    // Vendor Start
+    .container-fluid.py-5
+      .row.px-xl-5
+        .col
+          .owl-carousel.vendor-carousel
+            .bg-light.p-4
+              img(src='img/vendor-1.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-2.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-3.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-4.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-5.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-6.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-7.jpg', alt='')
+            .bg-light.p-4
+              img(src='img/vendor-8.jpg', alt='')

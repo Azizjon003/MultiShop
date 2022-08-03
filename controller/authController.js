@@ -194,6 +194,33 @@ const deleteMe = catchAsyncUser(async (req, res, next) => {
   const user = await User.findByIdAndDelete(id);
   resFunc(res, user, 204);
 });
+const isSignin = async (req, res, next) => {
+  let token;
+
+  if (req.cookies.jwt) {
+    token = req.cookies.jwt;
+  }
+
+  if (!token || token == "logout") {
+    return next();
+  }
+  // tokenni tekshirish kerak
+  const id = await promisify(jwt.verify)(token, process.env.SECRET);
+  if (!id) {
+    return next();
+  }
+  console.log(id);
+  // user bazada bor yo'qligini tekshirib olish
+  const user = await User.findById(id.id);
+
+  if (!user) {
+    return next();
+  }
+
+  console.log(user);
+  res.user = user;
+  return next();
+};
 
 module.exports = {
   signin,
@@ -204,4 +231,5 @@ module.exports = {
   updatePassword,
   deleteMe,
   updateMe,
+  isSignin,
 };
