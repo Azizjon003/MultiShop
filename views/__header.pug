@@ -8,14 +8,17 @@
         a.text-body.mr-3(href='') FAQs
     .col-lg-6.text-center.text-lg-right
       .d-inline-flex.align-items-center
-        .btn-group
-          button.btn.btn-sm.btn-light.dropdown-toggle(type='button', data-toggle='dropdown')
-            | My Account
-          .dropdown-menu.dropdown-menu-right
-            button.dropdown-item(type='button')
-              a(href='/login.html')  Sign in
-            button.dropdown-item(type='button')
-              a(href='/register.html') Sign up
+        if user
+            .btn-group
+            button.btn.btn-sm.btn-light.dropdown-toggle(type='button', data-toggle='dropdown')= user.name  
+        else
+            .btn-group
+            button.btn.btn-sm.btn-light.dropdown-toggle(type='button', data-toggle='dropdown') user.name  
+            .dropdown-menu.dropdown-menu-right
+                button.dropdown-item(type='button')
+                a(href='/login')  Sign in
+                button.dropdown-item(type='button')
+                a(href='/register') Sign up 
         .btn-group.mx-2
           button.btn.btn-sm.btn-light.dropdown-toggle(type='button', data-toggle='dropdown')
             | USD

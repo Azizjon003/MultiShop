@@ -7,7 +7,6 @@ const Product = require("../model/shop");
 const home = catchUser(async (req, res, next) => {
   const datas = await Category.find().populate("products");
   const products = await Product.find();
-  console.log(products);
   res.render("main", {
     data: datas,
     products: products,
@@ -25,14 +24,27 @@ const getOneTour = catchUser(async (req, res, next) => {
 });
 
 const login = catchUser(async (req, res, next) => {
-  res.render("loginUser");
+  const datas = await Category.find().populate("products");
+  res.render("login", {
+    data: datas,
+  });
 });
 const accaunt = catchUser(async (req, res, next) => {
   res.render("accaunt");
+});
+const products = catchUser(async (req, res, next) => {
+  const datas = await Category.find().populate("products");
+  let id = req.query.id;
+  const products = await Product.findById(id).populate("reviews");
+  res.render("detail", {
+    data: datas,
+    product: products,
+  });
 });
 module.exports = {
   home,
   getOneTour,
   login,
   accaunt,
+  products,
 };

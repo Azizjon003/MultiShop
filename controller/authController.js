@@ -63,7 +63,7 @@ const login = catchAsyncUser(async (req, res, next) => {
     expiresIn: "1d",
   });
   res.cookie("jwt", token, {
-    maxAge: 10 * 24 * 60 * 60 * 1000,
+    maxAge: 1 * 24 * 60 * 60 * 1000,
     httpOnly: true,
     secure: req.protocol === "https" ? true : false,
   });
@@ -196,16 +196,17 @@ const deleteMe = catchAsyncUser(async (req, res, next) => {
 });
 const isSignin = async (req, res, next) => {
   let token;
-
-  if (req.cookies.jwt) {
-    token = req.cookies.jwt;
+  console.log(req.headers.cookie);
+  if (req.headers.cookie) {
+    token = req.headers.cookie.split("=")[1];
   }
 
+  console.log(token);
   if (!token || token == "logout") {
     return next();
   }
   // tokenni tekshirish kerak
-  const id = await promisify(jwt.verify)(token, process.env.SECRET);
+  const id = await jwt.verify(token, process.env.SECRET);
   if (!id) {
     return next();
   }
@@ -218,7 +219,7 @@ const isSignin = async (req, res, next) => {
   }
 
   console.log(user);
-  res.user = user;
+  res.locals.user = user;
   return next();
 };
 

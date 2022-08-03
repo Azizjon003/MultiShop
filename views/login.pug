@@ -1,0 +1,32 @@
+extends base
+block content
+    .main
+        // Sing in  Form
+        section.sign-in
+        .container
+            .signin-content
+                .signin-image
+                    figure
+                        img(src='images/signin-image.jpg', alt='sing up image')
+                    a.signup-image-link(href='register.html') Create an account
+                .signin-form
+                    h2.form-title Sign up
+                    form#login-form.register-form(method='POST')
+                    .form-group
+                        label(for='your_name')
+                        i.zmdi.zmdi-account.material-icons-name
+                        input#your_name(type='email', name='your_name', placeholder='Your email')
+                    .form-group
+                        label(for='your_pass')
+                        i.zmdi.zmdi-lock
+                        input#your_pass(type='password', name='your_pass', placeholder='Password')
+                    .form-group
+                        input#remember-me.agree-term(type='checkbox', name='remember-me')
+                        label.label-agree-term(for='remember-me')
+                        span
+                            span
+                        | Remember me
+                    .form-group.form-button
+                        input#signin.form-submit(type='submit', name='signin', value='Log in')
+    script(src='js/lib/axios.js')
+    script(src="js/login.js")
