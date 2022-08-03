@@ -20,6 +20,10 @@ const reviewSchema = new mongoose.Schema({
     ref: "Product",
     required: true,
   },
+  createdAt: {
+    type: Date,
+    default: new Date(),
+  },
 });
 reviewSchema.pre(/^find/, function (next) {
   this.populate({

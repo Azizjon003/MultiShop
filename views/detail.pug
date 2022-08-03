@@ -99,7 +99,7 @@ block content
                             img.img-fluid.mr-3.mt-1(src='img/user.jpg', alt='Image', style='width: 45px')
                         
                             .media-body
-                                h6= `${el.user.name}   time:vaqtini yozish esdan chiqibdi uzur`
+                                h6= `${el.user.name}   Created : ${el.createdAt}`
                                 .text-primary.mb-2
                                 i.fas.fa-star
                                 i.fas.fa-star
@@ -114,22 +114,14 @@ block content
                       | are marked *
                     .d-flex.my-3
                       p.mb-0.mr-2 Your Rating * :
-                      .text-primary
-                        i.far.fa-star
-                        i.far.fa-star
-                        i.far.fa-star
-                        i.far.fa-star
-                        i.far.fa-star
+                        //- input#bahonikirit
                     form
                       .form-group
                         label(for='message') Your Review *
                         textarea#message.form-control(cols='30', rows='5')
-                      .form-group
-                        label(for='name') Your Name *
-                        input#name.form-control(type='text')
-                      .form-group
-                        label(for='email') Your Email *
-                        input#email.form-control(type='email')
+        
                       .form-group.mb-0
-                        input.btn.btn-primary.px-3(type='submit', value='Leave Your Review')
-      |  --&gt;
+                        input.btn.btn-primary.px-3.boss(type='submit', value='Leave Your Review')
+        |  --&gt;
+      script(src="/js/lib/axios.js")
+      script(src="/js/detail.js")  
