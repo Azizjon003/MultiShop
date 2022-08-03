@@ -9,18 +9,14 @@ function resFunc(res, data, statusCode) {
   });
 }
 const getAll = catchAsync(async (req, res, next, Model) => {
-  let data = new FeatureApi(req.query, Model)
-    .filter()
-    .sort()
-    .field()
-    .paginate();
+  let data = new FeatureApi(req.query, Model).filter().sort().field();
 
   data = await data.databaseQuery.populate("reviews");
   resFunc(res, data, 200);
 });
 const getOne = catchAsync(async (req, res, next, Model) => {
   const id = req.params.id;
-  const data = await Model.findById(id);
+  const data = await Model.findById(id).populate("reviews");
   resFunc(res, data, 200);
 });
 const add = catchAsync(async (req, res, next, Model) => {
