@@ -7,9 +7,9 @@ async function malumot2(id, description) {
       data: {
         description: description,
         rating: 4,
-        
       },
     });
+
     console.log(ress.status);
     if (ress.status == 201) {
       window.location.reload();
